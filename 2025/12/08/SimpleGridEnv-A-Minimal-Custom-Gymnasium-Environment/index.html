@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SimpleGridEnv: A Minimal Custom Gymnasium Environment | Hayd's Blog</title><meta name="author" content="Yuduo Liu"><meta name="copyright" content="Yuduo Liu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SimpleGridEnv: A Minimal Custom Gymnasium Environment This little SimpleGridEnv is a minimal custom Gymnasium environment: a 5×5 grid where an agent moves around, gets -1 per step, and +10 when it rea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SimpleGridEnv: A Minimal Custom Gymnasium Environment">
+<meta property="og:url" content="https://yuduo-hue.github.io/2025/12/08/SimpleGridEnv-A-Minimal-Custom-Gymnasium-Environment/">
+<meta property="og:site_name" content="Hayd&#39;s Blog">
+<meta property="og:description" content="SimpleGridEnv: A Minimal Custom Gymnasium Environment This little SimpleGridEnv is a minimal custom Gymnasium environment: a 5×5 grid where an agent moves around, gets -1 per step, and +10 when it rea">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yuduo-hue.github.io/img/Yamada%20Ryo.jpg">
+<meta property="article:published_time" content="2025-12-09T01:42:17.000Z">
+<meta property="article:modified_time" content="2025-12-09T01:42:56.412Z">
+<meta property="article:author" content="Yuduo Liu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuduo-hue.github.io/img/Yamada%20Ryo.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SimpleGridEnv: A Minimal Custom Gymnasium Environment",
+  "url": "https://yuduo-hue.github.io/2025/12/08/SimpleGridEnv-A-Minimal-Custom-Gymnasium-Environment/",
+  "image": "https://yuduo-hue.github.io/img/Yamada%20Ryo.jpg",
+  "datePublished": "2025-12-09T01:42:17.000Z",
+  "dateModified": "2025-12-09T01:42:56.412Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Yuduo Liu",
+      "url": "https://yuduo-hue.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/Yamada%20Ryo.jpg"><link rel="canonical" href="https://yuduo-hue.github.io/2025/12/08/SimpleGridEnv-A-Minimal-Custom-Gymnasium-Environment/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SimpleGridEnv: A Minimal Custom Gymnasium Environment',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: linear-gradient(20deg, #0062be, #98599c, #b76492, #ea3f5e);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hayd's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">SimpleGridEnv: A Minimal Custom Gymnasium Environment</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">SimpleGridEnv: A Minimal Custom Gymnasium Environment</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-12-09T01:42:17.000Z" title="Created 2025-12-08 20:42:17">2025-12-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-12-09T01:42:56.412Z" title="Updated 2025-12-08 20:42:56">2025-12-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>SimpleGridEnv: A Minimal Custom Gymnasium Environment</h1>
+<p>This little <code>SimpleGridEnv</code> is a <strong>minimal custom Gymnasium environment</strong>: a 5×5 grid where an agent moves around, gets -1 per step, and +10 when it reaches the goal.</p>
+<p>I’ll explain it in plain language first, then list official docs you can read.</p>
+<hr>
+<h2 id="1-What-This-Environment-Is">1. What This Environment <em>Is</em></h2>
+<ul>
+<li><strong>World</strong>: a 5×5 grid</li>
+<li><strong>State</strong>: a single integer from <code>0</code> to <code>24</code> (flattened cell index)</li>
+<li><strong>Start</strong>: bottom-left cell</li>
+<li><strong>Goal</strong>: top-right cell</li>
+<li><strong>Actions</strong>:
+<ul>
+<li><code>0</code>: up</li>
+<li><code>1</code>: right</li>
+<li><code>2</code>: down</li>
+<li><code>3</code>: left</li>
+</ul>
+</li>
+<li><strong>Reward</strong>:
+<ul>
+<li><code>+10</code> when you reach the goal</li>
+<li><code>-1</code> every other step</li>
+</ul>
+</li>
+<li><strong>Episode ends</strong> when:
+<ul>
+<li>the agent reaches the goal (<code>terminated = True</code>)</li>
+</ul>
+</li>
+</ul>
+<p>So you’ve created a tiny RL “maze” to test algorithms.</p>
+<hr>
+<h2 id="2-Line-by-Line-Explanation">2. Line-by-Line Explanation</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gymnasium <span class="keyword">as</span> gym</span><br><span class="line"><span class="keyword">from</span> gymnasium <span class="keyword">import</span> spaces</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>gymnasium</code> – the RL environment API</li>
+<li><code>spaces</code> – defines valid observation and action formats (Discrete, Box, etc.)</li>
+<li><code>numpy</code> – used here only to build a small grid for printing</li>
+</ul>
+<h3 id="Class-Definition-and-Metadata">Class Definition and Metadata</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleGridEnv</span>(gym.Env):</span><br><span class="line">    metadata = &#123;<span class="string">&quot;render_modes&quot;</span>: [<span class="string">&quot;human&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>You subclass <code>gym.Env</code>, which is the base class all Gymnasium environments must follow</li>
+<li><code>metadata</code> tells Gym what render modes the env supports. Here you only support <code>&quot;human&quot;</code> (printing to the console)</li>
+</ul>
+<h3 id="init-Define-Spaces-and-Basic-Properties"><code>__init__</code>: Define Spaces and Basic Properties</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, render_mode=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="built_in">super</span>().__init__()</span><br><span class="line">    <span class="variable language_">self</span>.size = <span class="number">5</span></span><br><span class="line">    <span class="variable language_">self</span>.observation_space = spaces.Discrete(<span class="variable language_">self</span>.size * <span class="variable language_">self</span>.size)</span><br><span class="line">    <span class="variable language_">self</span>.action_space = spaces.Discrete(<span class="number">4</span>)  <span class="comment"># 0: up, 1: right, 2: down, 3: left</span></span><br><span class="line">    <span class="variable language_">self</span>.state = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>self.size = 5</code> → grid is 5×5</li>
+<li><code>self.observation_space = spaces.Discrete(25)</code>:
+<ul>
+<li>Agent’s observation is a single integer <code>0..24</code></li>
+<li>Each number corresponds to a grid cell (flattened index)</li>
+</ul>
+</li>
+<li><code>self.action_space = spaces.Discrete(4)</code>:
+<ul>
+<li>There are 4 possible actions, numbered 0–3</li>
+</ul>
+</li>
+<li><code>self.state</code> will store the current cell index</li>
+</ul>
+<p>This matches the Gymnasium requirement that every env has <code>observation_space</code> and <code>action_space</code>.</p>
+<h3 id="reset-Start-a-New-Episode"><code>reset</code>: Start a New Episode</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">reset</span>(<span class="params">self, seed=<span class="literal">None</span>, options=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="built_in">super</span>().reset(seed=seed)</span><br><span class="line">    <span class="comment"># bottom-left index</span></span><br><span class="line">    <span class="variable language_">self</span>.state = (<span class="variable language_">self</span>.size - <span class="number">1</span>) * <span class="variable language_">self</span>.size + <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.state, &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>reset()</code> is called at the start of each episode</li>
+<li><code>super().reset(seed=seed)</code> lets Gymnasium handle seeding</li>
+<li><code>self.state = (self.size - 1) * self.size + 0</code>:
+<ul>
+<li><code>self.size - 1</code> is the last row (row index 4 in a 0–4 grid)</li>
+<li>Multiply by <code>self.size</code> to flatten <code>(row, col)</code> → index:
+<ul>
+<li>bottom-left = row 4, col 0 → <code>4*5 + 0 = 20</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>You return:
+<ul>
+<li><code>observation = self.state</code></li>
+<li><code>info = {}</code> (an empty dict, for extra debug info if needed)</li>
+</ul>
+</li>
+</ul>
+<h3 id="step-Apply-an-Action-and-Move-the-Agent"><code>step</code>: Apply an Action and Move the Agent</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">step</span>(<span class="params">self, action</span>):</span><br><span class="line">    <span class="comment"># convert index to (row, col)</span></span><br><span class="line">    row, col = <span class="built_in">divmod</span>(<span class="variable language_">self</span>.state, <span class="variable language_">self</span>.size)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>divmod(self.state, self.size)</code> converts a flat index back to 2D:
+<ul>
+<li><code>row = self.state // 5</code></li>
+<li><code>col = self.state % 5</code></li>
+</ul>
+</li>
+</ul>
+<p>Then update the position based on the action, but don’t walk off the grid:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> action == <span class="number">0</span> <span class="keyword">and</span> row &gt; <span class="number">0</span>:</span><br><span class="line">    row -= <span class="number">1</span></span><br><span class="line"><span class="keyword">elif</span> action == <span class="number">1</span> <span class="keyword">and</span> col &lt; <span class="variable language_">self</span>.size - <span class="number">1</span>:</span><br><span class="line">    col += <span class="number">1</span></span><br><span class="line"><span class="keyword">elif</span> action == <span class="number">2</span> <span class="keyword">and</span> row &lt; <span class="variable language_">self</span>.size - <span class="number">1</span>:</span><br><span class="line">    row += <span class="number">1</span></span><br><span class="line"><span class="keyword">elif</span> action == <span class="number">3</span> <span class="keyword">and</span> col &gt; <span class="number">0</span>:</span><br><span class="line">    col -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>action == 0</code> → go up (row - 1), but only if not already at top edge (<code>row &gt; 0</code>)</li>
+<li><code>action == 1</code> → go right (col + 1), but only if <code>col &lt; 4</code></li>
+<li><code>action == 2</code> → go down (row + 1), but only if <code>row &lt; 4</code></li>
+<li><code>action == 3</code> → go left (col - 1), but only if <code>col &gt; 0</code></li>
+<li>If the action would go outside, you simply ignore it and stay in place</li>
+</ul>
+<p>Update the flattened state again:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.state = row * <span class="variable language_">self</span>.size + col</span><br></pre></td></tr></table></figure>
+<p>Now define the goal and termination condition:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># goal at top-right</span></span><br><span class="line">goal_state = <span class="number">0</span> * <span class="variable language_">self</span>.size + (<span class="variable language_">self</span>.size - <span class="number">1</span>)</span><br><span class="line">terminated = <span class="variable language_">self</span>.state == goal_state</span><br><span class="line">truncated = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Goal is <strong>top-right</strong>:
+<ul>
+<li>row 0, col 4 → <code>0 * 5 + 4 = 4</code></li>
+</ul>
+</li>
+<li><code>terminated</code>:
+<ul>
+<li><code>True</code> if you reached the goal cell</li>
+<li>RL episode ends because the task is solved</li>
+</ul>
+</li>
+<li><code>truncated</code>:
+<ul>
+<li><code>False</code> here (you’re not using a time limit)</li>
+<li>In more complex environments, <code>truncated=True</code> means “ended due to time limit or external reason, not a natural terminal state”</li>
+</ul>
+</li>
+</ul>
+<p>Finally, compute reward:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reward = <span class="number">10.0</span> <span class="keyword">if</span> terminated <span class="keyword">else</span> -<span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>If you reached the goal → big positive reward <code>+10</code></li>
+<li>Otherwise → small penalty <code>-1</code> to encourage the shortest path</li>
+</ul>
+<p>And return the full result (Gymnasium’s <code>step</code> contract):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="variable language_">self</span>.state, reward, terminated, truncated, &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Next observation = <code>self.state</code></li>
+<li>Scalar <code>reward</code></li>
+<li><code>terminated</code> flag</li>
+<li><code>truncated</code> flag</li>
+<li><code>info</code> dict (empty for now)</li>
+</ul>
+<h3 id="render-Show-the-Grid-in-the-Terminal"><code>render</code>: Show the Grid in the Terminal</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">render</span>(<span class="params">self</span>):</span><br><span class="line">    grid = np.full((<span class="variable language_">self</span>.size, <span class="variable language_">self</span>.size), <span class="string">&quot;.&quot;</span>)</span><br><span class="line">    r, c = <span class="built_in">divmod</span>(<span class="variable language_">self</span>.state, <span class="variable language_">self</span>.size)</span><br><span class="line">    grid[r, c] = <span class="string">&quot;A&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n&quot;</span>.join(<span class="string">&quot; &quot;</span>.join(row) <span class="keyword">for</span> row <span class="keyword">in</span> grid))</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Creates a 5×5 array filled with <code>&quot;.&quot;</code></li>
+<li>Places <code>&quot;A&quot;</code> at the agent’s position (<code>r, c</code>)</li>
+<li>Prints the grid row by row</li>
+<li>This is a super simple “human render”; in real projects you might use <code>matplotlib</code> or a game engine instead</li>
+</ul>
+<hr>
+<h2 id="3-Official-Documentation-You-Can-Refer-To">3. Official Documentation You Can Refer To</h2>
+<p>Here are the <strong>official and authoritative docs</strong> that match what this code is doing:</p>
+<ol>
+<li>
+<p><strong>Gymnasium – Create a custom environment</strong><br>
+Explains exactly how to subclass <code>gymnasium.Env</code>, define <code>observation_space</code>, <code>action_space</code>, and implement <code>reset</code> / <code>step</code> / <code>render</code>.</p>
+</li>
+<li>
+<p><strong>Gymnasium Env API</strong><br>
+Formal description of <code>Env</code>, including what <code>step()</code> and <code>reset()</code> must return, and the meaning of <code>terminated</code> vs <code>truncated</code>.</p>
+</li>
+<li>
+<p><strong>Gym / Gymnasium environment creation (older but still useful)</strong><br>
+Very similar concepts, includes a gridworld example and explains environment lifecycle.</p>
+</li>
+<li>
+<p><strong>Spaces API</strong><br>
+Documentation for <code>spaces.Discrete</code>, <code>spaces.Box</code>, and other space types used to describe observations and actions.</p>
+</li>
+<li>
+<p><strong>Gridworld / SimpleGrid examples (third-party)</strong></p>
+<ul>
+<li>A simple gridworld environment for Gymnasium (gym-simplegrid). Good for seeing more advanced features but same overall pattern.</li>
+</ul>
+</li>
+</ol>
+<p>These will give you both <strong>official references</strong> and concrete examples similar to your <code>SimpleGridEnv</code>.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://yuduo-hue.github.io">Yuduo Liu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://yuduo-hue.github.io/2025/12/08/SimpleGridEnv-A-Minimal-Custom-Gymnasium-Environment/">https://yuduo-hue.github.io/2025/12/08/SimpleGridEnv-A-Minimal-Custom-Gymnasium-Environment/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/Yamada%20Ryo.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/12/04/My-learning-of-Reinforcement-Learning/" title="My Reinforcement Learning Journey"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">My Reinforcement Learning Journey</div></div><div class="info-2"><div class="info-item-1"> “Learning RL felt like assembling a machine while it was already running.” Over the past weeks I moved from casual curiosity about reinforcement learning (RL) to building small projects in Gymnasium, and then to probing the mathematical foundations that justify the code. This post records what I’ve learned—concepts, experiments, and insights—so future-me (and other beginners) can avoid some of my confusion.  1) Orientation: what I thought RL was—and what it really is At first, RL seemed like...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/Yamada%20Ryo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Yuduo Liu</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/yuduo-hue" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:anbian_0814@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">SimpleGridEnv: A Minimal Custom Gymnasium Environment</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-What-This-Environment-Is"><span class="toc-number">1.1.</span> <span class="toc-text">1. What This Environment Is</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Line-by-Line-Explanation"><span class="toc-number">1.2.</span> <span class="toc-text">2. Line-by-Line Explanation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-Definition-and-Metadata"><span class="toc-number">1.2.1.</span> <span class="toc-text">Class Definition and Metadata</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init-Define-Spaces-and-Basic-Properties"><span class="toc-number">1.2.2.</span> <span class="toc-text">__init__: Define Spaces and Basic Properties</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reset-Start-a-New-Episode"><span class="toc-number">1.2.3.</span> <span class="toc-text">reset: Start a New Episode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step-Apply-an-Action-and-Move-the-Agent"><span class="toc-number">1.2.4.</span> <span class="toc-text">step: Apply an Action and Move the Agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render-Show-the-Grid-in-the-Terminal"><span class="toc-number">1.2.5.</span> <span class="toc-text">render: Show the Grid in the Terminal</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Official-Documentation-You-Can-Refer-To"><span class="toc-number">1.3.</span> <span class="toc-text">3. Official Documentation You Can Refer To</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/12/08/SimpleGridEnv-A-Minimal-Custom-Gymnasium-Environment/" title="SimpleGridEnv: A Minimal Custom Gymnasium Environment">SimpleGridEnv: A Minimal Custom Gymnasium Environment</a><time datetime="2025-12-09T01:42:17.000Z" title="Created 2025-12-08 20:42:17">2025-12-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/12/04/My-learning-of-Reinforcement-Learning/" title="My Reinforcement Learning Journey">My Reinforcement Learning Journey</a><time datetime="2025-12-04T05:00:00.000Z" title="Created 2025-12-04 00:00:00">2025-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/26/My-Learning-Reflection-on-Mathematical-Foundation-of-Reinforcement-Learning/" title="My Learning Reflection on Mathematical Foundation of Reinforcement Learning">My Learning Reflection on Mathematical Foundation of Reinforcement Learning</a><time datetime="2025-11-27T00:01:07.000Z" title="Created 2025-11-26 19:01:07">2025-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/26/Learning-both-Indefinite-Integral-and-LaTeX/" title="Learning both Indefinite Integral and LaTeX">Learning both Indefinite Integral and LaTeX</a><time datetime="2025-11-26T13:54:01.000Z" title="Created 2025-11-26 08:54:01">2025-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/10/%E4%BB%8E%E6%9C%AC%E5%9C%B0-Hexo-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub-Pages%EF%BC%88%E8%B6%85%E8%AF%A6%E7%BB%86%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B%EF%BC%89/" title="从本地 Hexo 一键部署到 GitHub Pages（超详细新手教程）">从本地 Hexo 一键部署到 GitHub Pages（超详细新手教程）</a><time datetime="2025-11-10T12:40:49.000Z" title="Created 2025-11-10 07:40:49">2025-11-10</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #0062be, #98599c, #b76492, #ea3f5e);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Yuduo Liu</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.0.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
